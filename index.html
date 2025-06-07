@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fused View-Time Attention and Feedforward Reconstruction for 4D Scene Generation</title>
+    <title>4Real-Video-V2: Fused View-Time Attention and Feedforward Reconstruction for 4D Scene Generation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+ 
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -30,14 +31,14 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
         /* Styles for video display areas (main and new text-to-video) */
-        #video-display-area, #text-to-video-display-area {
+        #video-display-area, #text-to-video-display-area, #asset-display-area {
             background-color: #ffffff;
             padding: 24px;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
             margin-bottom: 40px; /* Space between videos and thumbnails */
             flex-direction: column;
-            gap: 20px;
+            gap: 10px;
         }
         /* Styles for grid sections */
         #gaussian-splats-section, #assets-section {
@@ -45,7 +46,7 @@
             padding: 24px;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            margin-top: 40px; /* Space above this section */
+            margin-top: 0px; /* Space above this section */
         }
         /* Styles for videos within grids */
         #gaussian-splats-grid video, #assets-video-grid video {
@@ -54,13 +55,136 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Slightly lighter shadow for grid videos */
         }
+        .publication-authors {
+            font-size: 1.2em; /* Slightly larger text for author names */
+            margin-bottom: 10px;
+        }
+        .author-block {
+            display: inline-block; /* Allows authors to flow like text */
+            margin-right: 15px; /* Space between author blocks */
+            white-space: nowrap; /* Keep author name and superscript together */
+        }
+        .author-block a {
+            text-decoration: none; /* Remove underline from links */
+            color: inherit; /* Inherit color from parent */
+        }
+        .superscript {
+            font-size: 0.7em; /* Smaller superscript */
+            vertical-align: super;
+            line-height: 0; /* Adjust line height for better alignment */
+        }
+        .institutions {
+            font-size: 1em;
+            color: #555; /* Slightly muted color for institutions */
+            margin-top: 3px;
+        }
+        .institution-block {
+            display: inline-block;
+            margin-right: 15px;
+        }
+        .publication-links {
+            font-size: 32px; /* Set your desired font size here */
+        }
+        .publication-links .button {
+                font-size: 1.5rem; /* Increase font size */
+                padding: 1rem 2rem; /* Add padding for a larger button */
+        }
+
+
+        .publication-button {
+            /* Basic button styling */
+            background-color: #333333; /* Dark grey background */
+            color: #ffffff; /* White text color */
+            padding: 5px 12px; /* Vertical and horizontal padding */
+            border: none; /* Remove default button border */
+            border-radius: 50px; /* Highly rounded corners */
+            cursor: pointer; /* Indicate it's clickable */
+            font-size: 1.1em; /* Slightly larger text */
+            font-weight: bold; /* Bold text */
+            display: flex; /* Use flexbox to align icon and text */
+            align-items: center; /* Vertically align icon and text */
+            gap: 10px; /* Space between the icon and text */
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+            width: fit-content; 
+        }
+
+        .publication-button:hover {
+            background-color: #555555; /* Slightly lighter grey on hover */
+        }
+
+        .publication-button .icon {
+            /* Styling for the icon wrapper */
+            font-size: 1.2em; /* Adjust icon size relative to button text */
+        }
+        .center-me {
+            display: block; /* Make it a block-level element so margin: auto works */
+            margin-left: auto;
+            margin-right: auto;
+            /* Shorthand: margin: 0 auto; */
+        }
     </style>
 </head>
 <body class="p-6">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-12 leading-tight">
-            Fused View-Time Attention and Feedforward Reconstruction for 4D Scene Generation
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center text-gray-900 mb-2 leading-tight">
+            4Real-Video-V2: Fused View-Time Attention and Feedforward Reconstruction for 4D Scene Generation
         </h1>
+        <div class="publication-authors text-center mb-4"> 
+            <span class="author-block"> 
+                <a href="https://mightychaos.github.io/">Chaoyang Wang</a><sup class="superscript">1,*</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://ashmrz.github.io/">Ashkan Mirzaei</a><sup class="superscript">1,*</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://vidit98.github.io/">Vidit Goel</a><sup class="superscript">1</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://www.willimenapace.com/">Willi Menapace</a><sup class="superscript">1</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://aliaksandrsiarohin.github.io/aliaksandr-siarohin-website/">Aliaksandr Siarohin</a><sup class="superscript">1</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://github.com/avinella">Avalon Vinella</a><sup class="superscript">1</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://github.com/waytobehigh">Michael Vasilkovsky</a><sup class="superscript">1</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://skor.sh/">Ivan Skorokhodov</a><sup class="superscript">1</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://scholar.google.com/citations?user=9YualrkAAAAJ&hl=en">Vladislav Shakhrai</a><sup class="superscript">1</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://scholar.google.com/citations?user=dVnLJhkAAAAJ&hl=en">Sergey Korolev</a><sup class="superscript">1</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="http://www.stulyakov.com/">Sergey Tulyakov</a><sup class="superscript">1</sup>
+            </span> 
+            <span class="author-block"> 
+                <a href="https://peterwonka.net/">Peter Wonka</a><sup class="superscript">1,2</sup>
+            </span> 
+        </div> 
+
+        <div class="institutions text-center mb-4">
+            <span class="institution-block"><sup class="superscript">1</sup>Snap Inc.</span>
+            <span class="institution-block"><sup class="superscript">2</sup>KAUST</span>
+        </div>
+
+        <div class="publication-button center-me mb-2">
+            <!-- PDF Link. -->
+            <!-- <span class="link-block"> -->
+            <a href=""
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+            </a>
+            <!-- </span> -->
+        </div>
 
         <div id="video-display-area" class="flex flex-col mt-16"> <h2 id="display-area-title" class="text-2xl font-bold text-gray-800 text-center"></h2>
             <h2 class="text-4xl md:text-4xl font-extrabold text-gray-900 text-center mb-2">4D Video from Text</h2>
@@ -70,8 +194,8 @@
             <div id="text-to-video-display-area" class="flex flex-col">
                 <h3 id="text-to-video-display-area-title" class="text-2xl font-bold text-gray-800 text-center"></h3>
                 <div class="flex flex-col gap-4">
-                    <div class="video-container">
-                        <p class="text-md font-semibold text-gray-700 mb-2">Fixed View:</p>
+                    <div class="video-container mt-0">
+                        <p class="text-md font-semibold text-gray-700 mb-2 mt-0">Fixed View:</p>
                         <video id="text-to-video-fix-view" controls autoplay loop muted playsinline>
                             Your browser does not support the video tag.
                         </video>
@@ -97,7 +221,7 @@
                 <h3 id="text-to-video-display-area-title" class="text-2xl font-bold text-gray-800 text-center"></h3>
                 <div class="flex flex-col gap-4">
                     <div class="video-container">
-                        <p class="text-md font-semibold text-gray-700 mb-2">Fixed View:</p>
+                        <p class="text-md font-semibold text-gray-700 mb-2 mt-0">Fixed View:</p>
                         <video id="video-fix-view" controls autoplay loop muted playsinline>
                             Your browser does not support the video tag.
                         </video>
@@ -122,8 +246,8 @@
         </div>
 
 
-        
-        <div id="asset-display-area" class="flex flex-col mt-16 p-6 rounded-xl">
+        <!-- <div id="asset-display-area" class="flex flex-col mt-16 p-6 rounded-xl"></div> -->
+        <div id="asset-display-area" class="flex flex-col mt-16">
             <h2 id="asset-display-area-title" class="text-2xl font-bold text-gray-800 text-center"></h2>
             <h2 class="text-4xl md:text-4xl font-extrabold text-gray-900 text-center mb-2">Animating 3D Assets</h2>
             <p class="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-4">
@@ -415,6 +539,13 @@
             "thumbnail": "supp_demo/ours_luma/28_fix_view_3_thumbnail.jpg",
             "video_fix_view": "supp_demo/ours_luma/28_fix_view_3.mp4",
             "video_frz_time": "supp_demo/ours_luma/28_frz_time_3_reversed_concat.mp4"
+        },
+        {
+            "base_name": "28",
+            "title": "28",
+            "thumbnail": "supp_demo/ours_luma/7_fix_view_3_thumbnail.jpg",
+            "video_fix_view": "supp_demo/ours_luma/7_fix_view_3.mp4",
+            "video_frz_time": "supp_demo/ours_luma/7_frz_time_3_reversed_concat.mp4"
         }
     ];
 
@@ -495,6 +626,13 @@
         // New data for the "Generating 4D videos from Text" section
         const textToVideoData =[
         {
+            "base_name": "0002",
+            "title": "Scene: 0002",
+            "thumbnail": "supp_demo/ours_veo2/0002_fix_view_3_thumbnail.png",
+            "video_fix_view": "supp_demo/ours_veo2/0002_fix_view_3.mp4",
+            "video_frz_time": "supp_demo/ours_veo2/0002_frz_time_3_reversed_concat.mp4"
+        },
+        {
             "base_name": "0020",
             "title": "Scene: 0020",
             "thumbnail": "supp_demo/ours_1/0020_fix_view_3_thumbnail.jpg",
@@ -537,11 +675,11 @@
             "video_frz_time": "supp_demo/ours_1/0023_frz_time_3_reversed_concat.mp4"
         },
         {
-            "base_name": "0025",
-            "title": "Scene: 0025",
-            "thumbnail": "supp_demo/ours_1/0025_fix_view_3_thumbnail.jpg",
-            "video_fix_view": "supp_demo/ours_1/0025_fix_view_3.mp4",
-            "video_frz_time": "supp_demo/ours_1/0025_frz_time_3_reversed_concat.mp4"
+            "base_name": "0031",
+            "title": "Scene: 0031",
+            "thumbnail": "supp_demo/ours_veo2/0031_fix_view_3_thumbnail.jpg",
+            "video_fix_view": "supp_demo/ours_veo2/0031_fix_view_3.mp4",
+            "video_frz_time": "supp_demo/ours_veo2/0031_frz_time_3_reversed_concat.mp4"
         },
         {
             "base_name": "0026",
@@ -789,7 +927,7 @@
             assetData.forEach(scene => {
                 const thumbnailItem = document.createElement('div');
                 // Stronger shadow: use shadow-2xl and hover:shadow-3xl (Tailwind doesn't have shadow-3xl by default, so use shadow-2xl for both)
-                thumbnailItem.className = 'thumbnail-item bg-white rounded-xl shadow-2xl hover:shadow-2xl overflow-hidden';
+                thumbnailItem.className = 'thumbnail-item bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden';
                 thumbnailItem.dataset.baseName = scene.base_name;
 
                 const img = document.createElement('img');
